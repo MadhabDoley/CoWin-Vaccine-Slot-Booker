@@ -1,0 +1,36 @@
+{% extends base %}
+
+{% block preamble %}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    var Swal = require('sweetalert2');
+    function beep_sound(n){
+        console.log(n)
+        var context = new AudioContext();
+        var oscillator = context.createOscillator();
+        var gain = context.createGain();
+        oscillator.connect(gain);
+        oscillator.frequency.value = 400;
+        oscillator.type = "square";
+        gain.connect(context.destination);
+        gain.gain.value = 100 * 0.01;
+        oscillator.start(context.currentTime);
+        oscillator.stop(context.currentTime + n);
+    };
+    
+</script>
+<style>
+
+.middle {
+    margin: 0 auto !important;
+    position: relative;
+}
+
+.capcha {
+    border: solid !important;
+    background:#f3f3f3 !important;
+}
+
+</style>
+
+{% endblock %}
